@@ -4,6 +4,25 @@
              xmlns:local="clr-namespace:SpletniBrskalnik"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        <Style TargetType="{x:Type Button}" x:Key="ButtonStyle">
+            <Setter Property="Background" Value="#FFFFFF"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="BorderBrush" Value="#000000"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="SnapsToDevicePixels" Value="True"></Setter>
+            
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="#000000"></Setter>
+                    <Setter Property="BorderThickness" Value="1"></Setter>
+                    <Setter Property="BorderBrush" Value="#FFFFFF"></Setter>
+                    <Setter Property="FontWeight" Value="Bold"></Setter>
+                </Trigger>
+            </Style.Triggers>
+            
+        </Style>
+
     </Application.Resources>
 </Application>

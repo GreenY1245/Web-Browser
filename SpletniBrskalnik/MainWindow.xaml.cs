@@ -23,6 +23,8 @@ using System.Data;
 using System.Collections.ObjectModel;
 using UserAppControl;
 using UserAppControlBookmarks;
+using System.Timers;
+using System.Windows.Media.Animation;
 
 namespace SpletniBrskalnik
 {
@@ -31,11 +33,17 @@ namespace SpletniBrskalnik
     /// </summary>
     public partial class MainWindow : Window
     {
-        int num_of_tabs, num_of_his_items, num_of_bkm_items;
+        int num_of_tabs;
+
+        DispatcherTimer timerController = new DispatcherTimer();
 
         public MainWindow()
         {
             InitializeComponent();
+
+            timerController.Tick += new EventHandler(timerController_Tick);
+            timerController.Interval = new TimeSpan(0, 5, 0);
+            timerController.Start();
 
             string defautlPath = "Data.xml";
 
@@ -46,6 +54,11 @@ namespace SpletniBrskalnik
             {
                 GenerateBasicStructure();
             }
+        }
+
+        public void timerController_Tick(object sender, EventArgs e)
+        {
+            UserAppControlController.Serialize("Data.xml");
         }
 
         public static void GenerateBasicStructure()
@@ -81,6 +94,7 @@ namespace SpletniBrskalnik
                 TabItem ti = new TabItem();
                 ti.Header = "New Tab " + num_of_tabs;
                 ti.Content = new Tab();
+                ti.MouseWheel += TabItem_MouseWheel;
                 tC_.Items.Add(ti);
                 ti.IsSelected = true;
             }
@@ -104,6 +118,13 @@ namespace SpletniBrskalnik
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
             settings x = new settings();
+
+            DoubleAnimation fadeinout = new DoubleAnimation();
+            fadeinout.From = 0;
+            fadeinout.To = 1;
+            fadeinout.Duration = new Duration(TimeSpan.FromSeconds(0.5));
+
+            x.BeginAnimation(Window.OpacityProperty, fadeinout);
             x.ShowDialog();
         }
 
@@ -165,6 +186,17 @@ namespace SpletniBrskalnik
         private void import_Click(object sender, RoutedEventArgs e)
         {
             XML_IMPORT();
+        }
+
+        private void TabItem_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            //var target = (FrameworkElement)sender;
+            //while (target is ContextMenu == false)
+            //{
+            //    target = (FrameworkElement)target.Parent;
+            //}
+            //var tabItem = (target as ContextMenu).PlacementTarget;
+            //tC_.Items.Remove(tabItem);
         }
 
         private void Chrome__3_0_MouseUp(object sender, MouseButtonEventArgs e)

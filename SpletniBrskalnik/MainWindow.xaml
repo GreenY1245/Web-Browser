@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpletniBrskalnik"
         mc:Ignorable="d"
-        Title="Greenternet Explorer" Height="720" Width="1280" MinWidth="300" MinHeight="150" Icon="images/browser_main_icon.png" ShowInTaskbar="true" WindowStartupLocation="CenterScreen" Closing="Chrome__3_0_Closing" Loaded="Chrome__3_0_Loaded" MouseUp="Chrome__3_0_MouseUp">
+        Title="Greenternet Explorer" WindowState="Maximized" Height="720" Width="1280" MinWidth="500" MinHeight="500" Icon="images/browser_main_icon.png" ShowInTaskbar="true" WindowStartupLocation="CenterScreen" Closing="Chrome__3_0_Closing" Loaded="Chrome__3_0_Loaded" MouseUp="Chrome__3_0_MouseUp">
 
 
     <Grid>
@@ -24,6 +24,7 @@
                 <Menu.Background>
                     <ImageBrush/>
                 </Menu.Background>
+
                 <MenuItem Width="40">
                     <MenuItem.Background>
                         <ImageBrush Stretch="Uniform" ImageSource="images/file.png"/>
@@ -95,7 +96,7 @@
 
                 <TabControl x:Name="tC_" DockPanel.Dock="Top">
 
-                    <TabItem Header="New Tab">
+                    <TabItem Header="New Tab" MouseWheel="TabItem_MouseWheel">
                         <local:Tab></local:Tab>
                     </TabItem>
 

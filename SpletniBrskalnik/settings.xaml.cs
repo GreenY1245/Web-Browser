@@ -21,6 +21,8 @@ using System.Collections.ObjectModel;
 using System.Collections;
 using UserAppControl;
 using UserAppControlBookmarks;
+using System.Timers;
+using System.Windows.Media.Animation;
 
 namespace SpletniBrskalnik
 {
@@ -131,7 +133,16 @@ namespace SpletniBrskalnik
 
 
             SpletniBrskalnik.Properties.Settings.Default.Save();
-            this.Close();
+
+            DoubleAnimation fadeinout = new DoubleAnimation();
+            fadeinout.From = 1;
+            fadeinout.To = 0;
+            fadeinout.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            fadeinout.Completed += completedAnimation;
+
+            this.BeginAnimation(Window.OpacityProperty, fadeinout);
+
+            //this.Close();
         }
 
         public static void returnToDefault(int x)
@@ -209,7 +220,23 @@ namespace SpletniBrskalnik
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // ne pali
+            DoubleAnimation fadeinout = new DoubleAnimation();
+            fadeinout.From = 1;
+            fadeinout.To = 0;
+            fadeinout.Duration = new Duration(TimeSpan.FromSeconds(0.5));
+
+            this.BeginAnimation(Window.OpacityProperty, fadeinout);
+
+            fadeinout.Completed += completedAnimation;
+        }
+
+        public void completedAnimation(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
         }
     }
 }

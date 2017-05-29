@@ -135,6 +135,7 @@
     <Resource Include="images\backward.png" />
     <Resource Include="images\forward.png" />
     <Resource Include="images\reload.png" />
+    <Resource Include="Resources\sloflag.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\browser_main_icon.png" />
@@ -168,7 +169,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

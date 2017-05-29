@@ -21,6 +21,7 @@ using System.Data;
 using System.Collections.ObjectModel;
 using UserAppControl;
 using UserAppControlBookmarks;
+using System.Windows.Media.Animation;
 
 namespace SpletniBrskalnik
 {
@@ -34,16 +35,16 @@ namespace SpletniBrskalnik
         public Tab()
         {
             InitializeComponent();
+
+            if (UserAppControlController.Controller != null)
+            {
+                bookmark_mainwindow_listview.ItemsSource = UserAppControlController.Controller.mapa_list[0].Bookmarks;
+            }
         }
 
         private void searchBox_Loaded(object sender, RoutedEventArgs e)
         {
             searchBox.Text = Convert.ToString(browserSource1.Source);
-        }
-
-        private void searchBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            searchBox.Text = null;
         }
 
         private void browserSource1_Loaded(object sender, RoutedEventArgs e)
@@ -78,19 +79,22 @@ namespace SpletniBrskalnik
 
         private void searchBox_KeyUp(object sender, KeyEventArgs e)
         {
-            string srcString = Convert.ToString(sender);
+            string srcString = searchBox.Text;
 
-            if (e.Key == System.Windows.Input.Key.Enter)
+            if (!string.IsNullOrWhiteSpace(searchBox.Text))
             {
-                txB_sb_it1.Text = "Loading...";
+                if (e.Key == System.Windows.Input.Key.Enter)
+                {
+                    txB_sb_it1.Text = "Loading...";
 
-                if (srcString.StartsWith("https://") || srcString.StartsWith("http://"))
-                {
-                    browserSource1.Source = new Uri(srcString);
-                }
-                else
-                {
-                    browserSource1.Source = new Uri("http://" + srcString);
+                    if (srcString.StartsWith("https://") || srcString.StartsWith("http://"))
+                    {
+                        browserSource1.Source = new Uri(srcString);
+                    }
+                    else
+                    {
+                        browserSource1.Source = new Uri("http://" + srcString);
+                    }
                 }
             }
         }
@@ -115,6 +119,8 @@ namespace SpletniBrskalnik
             his.Icon = getimage(browserSource1.Source.Host);
 
             UserAppControlController.Controller.history_list.Add(his);
+
+            searchBox.Text = Convert.ToString(browserSource1.Source);
 
             txB_sb_it1.Text = "Loaded";
         }
@@ -159,11 +165,6 @@ namespace SpletniBrskalnik
             browserSource1_Loaded(sender, e);
         }
 
-        private void searchBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            searchBox.Text = Convert.ToString(browserSource1.Source);
-        }
-
         private void b_google_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             var srcString = sender.ToString().Remove(0, sender.ToString().IndexOf(' ') + 1);
@@ -180,6 +181,12 @@ namespace SpletniBrskalnik
                 browserSource1.Source = new Uri("http://" + srcString);
             }
 
+        }
+
+        private void searchBox_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            searchBox.SelectAll();
+            this.Focus();
         }
     }
 }

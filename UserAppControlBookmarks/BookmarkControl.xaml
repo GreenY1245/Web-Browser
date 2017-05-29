@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:UserAppControlBookmarks"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="750">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.7*"></RowDefinition>
@@ -21,33 +22,53 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="0.03*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Button Name="AddBookmark" Grid.Row="8" Grid.Column="0" Margin="3" Content="Add bookmark" Click="AddBookmark_Click"></Button>
-        <Button Name="addFolder" Grid.Row="9" Grid.Column="0" Margin="3" Content="Add folder" Click="addFolder_Click"></Button>
-        <Button Name="RemoveBookmark" Grid.Row="8" Grid.Column="3" Margin="3" Content="Remove Bookmark" Click="Button_Click_1"></Button>
-        <Button Name="RemoveFolder" Grid.Row="9" Grid.Column="3" Margin="3" Content="Remove Folder" Click="RemoveFolder_Click"></Button>
+        <Button Style="{StaticResource ButtonStyle}" Name="AddBookmark" Grid.Row="8" Grid.Column="0" Margin="3" Content="Add bookmark" Click="AddBookmark_Click"></Button>
+        <Button Style="{StaticResource ButtonStyle}" Name="addFolder" Grid.Row="9" Grid.Column="0" Margin="3" Content="Add folder" Click="addFolder_Click"></Button>
+        <Button Style="{StaticResource ButtonStyle}" Name="RemoveBookmark" Grid.Row="8" Grid.Column="4" Margin="3" Content="Remove Bookmark" Click="Button_Click_1"></Button>
+        <Button Style="{StaticResource ButtonStyle}" Name="RemoveFolder" Grid.Row="9" Grid.Column="5" Margin="3" Content="Remove Folder" Click="RemoveFolder_Click"></Button>
 
-        <TextBox Name="newBookmark" Grid.Row="8" Grid.Column="1" Margin="3"></TextBox>
+        <TextBox Name="newBookmarkURL" Grid.Row="8" Grid.Column="1" Margin="3"></TextBox>
         <TextBox Name="newFolder" Grid.Row="9" Grid.Column="1" Margin="3"></TextBox>
 
-        <TreeView Name="treeview_bookmarks" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="8" ItemsSource="{Binding}" SelectedItemChanged="bkmark_SelectedItemChanged">
+        <TreeView Name="treeview_bookmarks" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="8" ItemsSource="{Binding}" SelectedItemChanged="bkmark_SelectedItemChanged" PreviewMouseRightButtonDown="treeview_bookmarks_PreviewMouseRightButtonDown">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Maps}">
-                    <TextBlock Text="{Binding Title}"></TextBlock>
+                    <TextBlock Text="{Binding Title}">
+                        <TextBlock.ContextMenu>
+                            <ContextMenu Name="SolutionContext">
+                                <MenuItem Click="DeleteContext_Click" Name="DeleteContext" Header="Delete Folder"></MenuItem>
+                            </ContextMenu>
+                        </TextBlock.ContextMenu>
+                    </TextBlock>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
+
         </TreeView>
 
-        <ListView Name="listview_bookmarks" Grid.Column="2" Grid.RowSpan="8" Grid.ColumnSpan="2">
+        <GridSplitter Background="DarkGray" Grid.RowSpan="8" Grid.Column="2" HorizontalAlignment="Stretch"></GridSplitter>
+        
+        <ListView Name="listview_bookmarks" Grid.Column="3" Grid.RowSpan="8" Grid.ColumnSpan="2">
 
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Title}"></TextBlock>
+                    <DockPanel>
+                        <Image Margin="2,0,0,0" Name="sourceimage" MaxHeight="16" Source="{Binding AddressURI}"></Image>
+                        <TextBlock Margin="2,0,0,0" Text="{Binding Title}"></TextBlock>
+                    </DockPanel>
+
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding SIDomain}" Value="true">
+                            <Setter TargetName="sourceimage" Property="Source" Value="/Resources/sloflag.ico"></Setter>
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+
                 </DataTemplate>
             </ListView.ItemTemplate>
 

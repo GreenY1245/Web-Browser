@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:SpletniBrskalnik"
         xmlns:BookmarkControl="clr-namespace:UserAppControlBookmarks;assembly=UserAppControlBookmarks"
         mc:Ignorable="d"
-        Title="Settings" MinWidth="750" MinHeight="500" MaxWidth="750" MaxHeight="500" Icon="images/browser_main_icon.png" Width="500" Height="500" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="Settings" MinWidth="750" MinHeight="500" MaxWidth="750" MaxHeight="500" Icon="images/browser_main_icon.png" Width="500" Height="500" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Closing="Window_Closing" Closed="Window_Closed">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"></ColumnDefinition>
@@ -27,24 +28,24 @@
 
             <TabItem Header="General" Width="100" Name="GeneralSettings">
 
-                <DockPanel Name="dock_general">
+                    <DockPanel Name="dock_general">
 
-                    <Grid>
+                        <Grid>
 
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="1*"></RowDefinition>
-                            <RowDefinition Height="1*"></RowDefinition>
-                            <RowDefinition Height="1*"></RowDefinition>
-                            <RowDefinition Height="1*"></RowDefinition>
-                            <RowDefinition Height="1*"></RowDefinition>
-                            <RowDefinition Height="1*"></RowDefinition>
-                            <RowDefinition Height="1*"></RowDefinition>
-                        </Grid.RowDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                            </Grid.RowDefinitions>
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"></ColumnDefinition>
-                            <ColumnDefinition Width="5*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                                <ColumnDefinition Width="5*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
 
                         <Label Grid.ColumnSpan="2" DockPanel.Dock="Top">Aplication startup homepage</Label>
                         <RadioButton Grid.Row="1" Grid.ColumnSpan="2" DockPanel.Dock="Top" Name="radio_default" Margin="10" Content="Default homepage (Google)" Checked="radio_default_Checked"></RadioButton>
@@ -52,49 +53,49 @@
                         <RadioButton Grid.Row="3" Grid.ColumnSpan="2" DockPanel.Dock="top" Name="radio_custompage" Margin="10" Content="Load custom page" Checked="radio_custompage_Checked"></RadioButton>
                         <TextBox Name="customSource" Grid.Row="3" Grid.Column="1" DockPanel.Dock="Top" Margin="10"></TextBox>
                         <Separator Grid.ColumnSpan="2" DockPanel.Dock="Top" />
-                        <Button Name="Apply" Margin="10" Grid.Column="1" Grid.Row="6" DockPanel.Dock="Left" Content="Apply" Click="Apply_Click"></Button>
-                        <Button IsCancel="True" Name="Cancel" Margin="10" Grid.Column="0" Grid.Row="6" DockPanel.Dock="Left" Content="Cancel" Click="Button_Click"></Button>
+                        <Button Style="{StaticResource ButtonStyle}" Name="Apply" Margin="10" Grid.Column="1" Grid.Row="6" DockPanel.Dock="Left" Content="Apply" Click="Apply_Click"></Button>
+                        <Button Style="{StaticResource ButtonStyle}" IsCancel="True" Name="Cancel" Margin="10" Grid.Column="0" Grid.Row="6" DockPanel.Dock="Left" Content="Cancel" Click="Button_Click"></Button>
 
-                    </Grid>
+                        </Grid>
 
-                </DockPanel>
-                
-            </TabItem>
+                    </DockPanel>
 
-            <TabItem Header="Style" Width="100" Name="StyleSettings">
+                </TabItem>
 
-                <DockPanel Name="dock_style">
+                <TabItem Header="Style" Width="100" Name="StyleSettings">
 
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="1*"></RowDefinition>
-                            <RowDefinition Height="1*"></RowDefinition>
-                            <RowDefinition Height="1*"></RowDefinition>
-                            <RowDefinition Height="1*"></RowDefinition>
-                            <RowDefinition Height="1*"></RowDefinition>
-                            <RowDefinition Height="1*"></RowDefinition>
-                            <RowDefinition Height="1*"></RowDefinition>
-                        </Grid.RowDefinitions>
+                    <DockPanel Name="dock_style">
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"></ColumnDefinition>
-                            <ColumnDefinition Width="5*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                            </Grid.RowDefinitions>
 
-                        <Label Grid.ColumnSpan="2" DockPanel.Dock="Top">Aplication startup homepage</Label>
-                        <Separator Grid.ColumnSpan="2" DockPanel.Dock="Top" />
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                                <ColumnDefinition Width="5*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
 
-                        <CheckBox Name="showBookmarks" Grid.Row="1" Content="Show Bookmarks" Checked="CheckBox_Checked" Unchecked="showBookmarks_Unchecked"></CheckBox>
-                        <CheckBox Name="showHomeButton" Grid.Row="1" Grid.Column="2" Content="Show Home Button" Checked="showHomeButton_Checked" Unchecked="showHomeButton_Unchecked"></CheckBox>
-                        
-                        <Button Name="Apply_style" Margin="10" Grid.Column="1" Grid.Row="6" DockPanel.Dock="Left" Content="Apply" Click="Apply_style_Click"></Button>
-                        <Button IsCancel="True" Name="Cancel_style" Margin="10" Grid.Column="0" Grid.Row="6" DockPanel.Dock="Left" Content="Cancel" Click="Cancel_style_Click"></Button>
+                            <Label Grid.ColumnSpan="2" DockPanel.Dock="Top">Aplication startup homepage</Label>
+                            <Separator Grid.ColumnSpan="2" DockPanel.Dock="Top" />
 
-                    </Grid>
-                    
-                </DockPanel>
+                            <CheckBox Name="showBookmarks" Grid.Row="1" Content="Show Bookmarks" Checked="CheckBox_Checked" Unchecked="showBookmarks_Unchecked"></CheckBox>
+                            <CheckBox Name="showHomeButton" Grid.Row="1" Grid.Column="2" Content="Show Home Button" Checked="showHomeButton_Checked" Unchecked="showHomeButton_Unchecked"></CheckBox>
 
-            </TabItem>
+                            <Button Style="{StaticResource ButtonStyle}" Name="Apply_style" Margin="10" Grid.Column="1" Grid.Row="6" DockPanel.Dock="Left" Content="Apply" Click="Apply_style_Click"></Button>
+                            <Button Style="{StaticResource ButtonStyle}" IsCancel="True" Name="Cancel_style" Margin="10" Grid.Column="0" Grid.Row="6" DockPanel.Dock="Left" Content="Cancel" Click="Cancel_style_Click"></Button>
+
+                        </Grid>
+
+                    </DockPanel>
+
+                </TabItem>
 
             <TabItem Header="Bookmarks" Width="100" Name="BookmarkSettings">
 
@@ -106,49 +107,54 @@
 
             <TabItem Header="History" Width="100" Name="HistorySettings">
 
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="0.7*"></RowDefinition>
-                        <RowDefinition Height="0.5*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.7*"></RowDefinition>
+                            <RowDefinition Height="0.5*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                        </Grid.RowDefinitions>
 
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"></ColumnDefinition>
-                        <ColumnDefinition Width="2*"></ColumnDefinition>
-                        <ColumnDefinition Width="2*"></ColumnDefinition>
-                        <ColumnDefinition Width="2*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
 
-                    <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="listview_history" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="8" ItemsSource="{Binding}">
-                        <ListView.ItemTemplate>
+                        <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="listview_history" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="8" ItemsSource="{Binding}">
+                            <ListView.ItemTemplate>
                             <DataTemplate>
                                 <DockPanel>
-                                    <Image MaxHeight="16" Source="{Binding AddressURI}"></Image>
+                                    <Image Name="sourceimage" MaxHeight="16" Source="{Binding AddressURI}"></Image>
                                     <TextBlock FontWeight="Bold" Margin="10, 0, 0, 0" Text="{Binding Title}"></TextBlock>
                                     <TextBlock FontWeight="Bold" Opacity="0.7" Margin="10, 0, 0, 0" Text="{Binding Time}"></TextBlock>
                                     <TextBlock Margin="10, 0, 0, 0" Opacity="0.5" Text="{Binding Address}"></TextBlock>
                                 </DockPanel>
+
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding SIDomain}" Value="true">
+                                        <Setter TargetName="sourceimage" Property="Source" Value="Resources/sloflag.ico"></Setter>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                                
                             </DataTemplate>
                         </ListView.ItemTemplate>
-                    </ListView>
+                        </ListView>
 
-                    <Button Name="history_deleteOne" Grid.Row="8" Grid.Column="1" Content="Delete" Click="history_deleteOne_Click"></Button>
-                    <Button Name="history_deleteAll" Grid.Row="8" Grid.Column="2" Content="Delete All" Click="history_deleteAll_Click"></Button>
-                    
-                </Grid>
-                
-            </TabItem>
 
+                    <Button Style="{StaticResource ButtonStyle}" Margin="5, 5, 5, 5" Name="history_deleteOne" Grid.Row="8" Grid.Column="1" Content="Delete" Click="history_deleteOne_Click"></Button>
+                    <Button Style="{StaticResource ButtonStyle}" Margin="5, 5, 5, 5" Name="history_deleteAll" Grid.Row="8" Grid.Column="2" Content="Delete All" Click="history_deleteAll_Click"></Button>
+
+                    </Grid>
+
+                </TabItem>
         </TabControl>
-        
-        
     </Grid>
 </Window>

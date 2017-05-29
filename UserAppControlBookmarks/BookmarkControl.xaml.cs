@@ -44,24 +44,45 @@ namespace UserAppControlBookmarks
         {
 
             Mapa m = (Mapa)treeview_bookmarks.SelectedItem;
+            Bookmark bk = new Bookmark();
 
             string bkm;
 
             if (m != null)
             {
-                if (newBookmark.Text == null)
+                try
                 {
-                    treeview_bookmarkss++;
-                    bkm = "new_bookmark" + treeview_bookmarkss;
-                }
-                else
-                {
-                    bkm = newBookmark.Text;
-                }
+                    string temphost = newBookmarkURL.Text;
 
-                m.Bookmarks.Add(new Bookmark(bkm, newBookmark.Text, DateTime.Now, ""));
+                    if (!(temphost.StartsWith("http") || temphost.StartsWith("https")))
+                    {
+                        temphost = "http://" + temphost;
+                    }
+
+                    Uri temp = new Uri(temphost);
+
+                    bk.Address = Convert.ToString(temp);
+                    bk.Title = Convert.ToString(temp.Host);
+                    bk.Icon = getimage(temp.Host);
+                    bk.Time = DateTime.Now;
+
+                    UserAppControlController.Controller.mapa_list[0].Bookmarks.Add(bk);
+                }
+                catch (Exception x)
+                {
+                    MessageBox.Show("Error adding bookmark: " + x.Message);
+                }
             }
+        }
 
+        private string getimage(string currentSource)
+        {
+            string imagepath;
+            var client = new System.Net.WebClient();
+            Directory.CreateDirectory("host/");
+            imagepath = "host/" + currentSource + ".ico";
+            client.DownloadFile(@"https://www.google.com/s2/favicons?domain_url=" + currentSource, imagepath);
+            return imagepath;
         }
 
         private void addFolder_Click(object sender, RoutedEventArgs e)
@@ -125,6 +146,39 @@ namespace UserAppControlBookmarks
         private void bkmark_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             listview_bookmarks.ItemsSource = ((Mapa)treeview_bookmarks.SelectedItem).Bookmarks;
+        }
+
+        private void DeleteContext_Click(object sender, RoutedEventArgs e)
+        {
+            Mapa x = (Mapa)treeview_bookmarks.SelectedItem;
+            bool del = false;
+            if (UserAppControlController.Controller.mapa_list.IndexOf(x) != 0)
+            {
+                del = RemoveFolder_(x, UserAppControlController.Controller.mapa_list);
+
+                if (del == false)
+                {
+                    MessageBox.Show("Folder could not be deleted!");
+                }
+            }
+        }
+
+        static TreeViewItem VisualUpwardSearch(DependencyObject source)
+        {
+            while (source != null && !(source is TreeViewItem))
+                source = VisualTreeHelper.GetParent(source);
+
+            return source as TreeViewItem;
+        }
+
+        private void treeview_bookmarks_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            TreeViewItem tvi = VisualUpwardSearch(e.OriginalSource as DependencyObject);
+            if (tvi != null)
+            {
+                tvi.Focus();
+                e.Handled = true;
+            }
         }
     }
 }
