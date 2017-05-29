@@ -113,8 +113,7 @@ namespace SpletniBrskalnik
         {
             int radioChecked = SpletniBrskalnik.Properties.Settings.Default.radioChecked;
             var browser = SpletniBrskalnik.Properties.Settings.Default;
-
-            Tab tb = new Tab();
+            MainWindow mw = new MainWindow();
 
             if (radioChecked == 1)
             {
@@ -122,7 +121,7 @@ namespace SpletniBrskalnik
             }
             else if (radioChecked == 2)
             {
-                browser.HomePage = Convert.ToString(tb.browserSource1.Source);
+                browser.HomePage = Convert.ToString(mw.browserSource1.Source);
             }
             else if (radioChecked == 3)
             {

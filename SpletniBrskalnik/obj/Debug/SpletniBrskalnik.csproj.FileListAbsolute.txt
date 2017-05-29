@@ -40,6 +40,3 @@ D:\Dropbox\Dropbox\Visual Studio Programs\Interakcija-c-r\SpletniBrskalnik\Splet
 D:\Dropbox\Dropbox\Visual Studio Programs\Interakcija-c-r\SpletniBrskalnik\SpletniBrskalnik\bin\Debug\UserAppControlBookmarks.dll
 D:\Dropbox\Dropbox\Visual Studio Programs\Interakcija-c-r\SpletniBrskalnik\SpletniBrskalnik\bin\Debug\UserAppControl.pdb
 D:\Dropbox\Dropbox\Visual Studio Programs\Interakcija-c-r\SpletniBrskalnik\SpletniBrskalnik\bin\Debug\UserAppControlBookmarks.pdb
-D:\Dropbox\Dropbox\Visual Studio Programs\Interakcija-c-r\SpletniBrskalnik\SpletniBrskalnik\obj\Debug\Tab.g.cs
-D:\Dropbox\Dropbox\Visual Studio Programs\Interakcija-c-r\SpletniBrskalnik\SpletniBrskalnik\obj\Debug\GeneratedInternalTypeHelper.g.cs
-D:\Dropbox\Dropbox\Visual Studio Programs\Interakcija-c-r\SpletniBrskalnik\SpletniBrskalnik\obj\Debug\Tab.baml

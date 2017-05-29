@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpletniBrskalnik"
         mc:Ignorable="d"
-        Title="Greenternet Explorer" Height="720" Width="1280" MinWidth="300" MinHeight="150" Icon="images/browser_main_icon.png" ShowInTaskbar="true" WindowStartupLocation="CenterScreen" Closing="Chrome__3_0_Closing" Loaded="Chrome__3_0_Loaded" MouseUp="Chrome__3_0_MouseUp">
+        Title="Greenternet Explorer" Height="722" Width="1283" MinWidth="300" MinHeight="150" Icon="images/browser_main_icon.png" ShowInTaskbar="true" WindowStartupLocation="CenterScreen" Closing="Chrome__3_0_Closing" Loaded="Chrome__3_0_Loaded" MouseUp="Chrome__3_0_MouseUp">
 
 
     <Grid>
@@ -61,9 +61,9 @@
                     </MenuItem.Background>
 
                     <ListView Name="bkmark">
-                        <ListViewItem Name="b_google">www.google.com</ListViewItem>
-                        <ListViewItem Name="b_twitter">www.twitter.com/GreenY1245</ListViewItem>
-                        <ListViewItem Name="b_steam">store.steampowered.com</ListViewItem>
+                        <ListViewItem Name="b_google" MouseDoubleClick="b_google_MouseDoubleClick" MouseLeftButtonUp="b_google_MouseLeftButtonUp">www.google.com</ListViewItem>
+                        <ListViewItem Name="b_twitter" MouseDoubleClick="b_google_MouseDoubleClick" MouseLeftButtonUp="b_google_MouseLeftButtonUp">www.twitter.com/GreenY1245</ListViewItem>
+                        <ListViewItem Name="b_steam" MouseDoubleClick="b_google_MouseDoubleClick" MouseLeftButtonUp="b_google_MouseLeftButtonUp">store.steampowered.com</ListViewItem>
                     </ListView>
 
                 </MenuItem>
@@ -73,15 +73,9 @@
                         <ImageBrush Stretch="Uniform" ImageSource="images/history.png"/>
                     </MenuItem.Background>
                     <ListView x:Name="his_listView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <ListViewItem Name="Default_test_item">www.google.com</ListViewItem>
+                        <ListViewItem Name="Default_test_item" MouseLeftButtonUp="b_google_MouseLeftButtonUp">www.google.com</ListViewItem>
                     </ListView>
                 </MenuItem>
-
-                <Button Background="White" Width="25" Height="25" Name="nTab_button" Click="nTab_button_Click" ToolTip="Add a new tab" BorderBrush="{x:Null}" Foreground="{x:Null}" BorderThickness="0">
-                    <Button.Content>
-                        <Image Source="images/plus.png"></Image>
-                    </Button.Content>
-                </Button>
 
                 <MenuItem Width="25" BorderThickness="0" StaysOpenOnClick="True" Click="MenuItem_Click_1">
                     <MenuItem.Background>
@@ -93,15 +87,71 @@
 
             <DockPanel DockPanel.Dock="Top">
 
+                <Button Width="25" Height="25" Name="backB" Grid.ColumnSpan="2" DockPanel.Dock="Left" FontWeight="Bold" Click="Button_Click" BorderThickness="0" Foreground="{x:Null}" BorderBrush="{x:Null}" ToolTip="Go Back">
+                    <Button.Background>
+                        <ImageBrush ImageSource="images/backward.png" Stretch="UniformToFill"/>
+                    </Button.Background>
+                </Button>
+                <Button Width="25" Height="25" Name="forwB" Grid.ColumnSpan="2" DockPanel.Dock="Left" FontWeight="Bold" Click="forwB_Click" BorderThickness="0" BorderBrush="{x:Null}" Foreground="{x:Null}" ToolTip="Go Forward">
+                    <Button.Background>
+                        <ImageBrush ImageSource="images/forward.png" Stretch="UniformToFill"/>
+                    </Button.Background>
+                </Button>
+                <Button Width="25" Height="25" Name="refrB" Grid.ColumnSpan="2" DockPanel.Dock="Left" FontWeight="Bold" Click="refrB_Click" BorderThickness="0" BorderBrush="{x:Null}" Foreground="{x:Null}" ToolTip="Reload">
+                    <Button.Background>
+                        <ImageBrush ImageSource="images/reload.png" Stretch="UniformToFill"/>
+                    </Button.Background>
+                </Button>
+                <Button Width="25" Height="25" Name="nTab_button" Content="New Tab" Click="nTab_button_Click" ToolTip="Add a new tab" BorderBrush="{x:Null}" Foreground="{x:Null}" BorderThickness="0">
+                    <Button.Background>
+                        <ImageBrush ImageSource="images/plus.png" Stretch="UniformToFill"/>
+                    </Button.Background>
+                </Button>
+                <Button Width="25" Height="25" Name="backHome" Content="Home" BorderThickness="0" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="backHome_Click">
+                    <Button.Background>
+                        <ImageBrush Stretch="Uniform" ImageSource="images/home.png"/>
+                    </Button.Background>
+                </Button>
+
                 <TabControl x:Name="tC_" DockPanel.Dock="Top">
 
-                    <TabItem Header="New Tab">
-                        <local:Tab></local:Tab>
+                    <TabItem Header="New Tab" MouseLeftButtonUp="TabItem_MouseLeftButtonUp">
+                        <DockPanel Name="db_tabitem" LastChildFill="True">
+                            <Button Name="addBookmarkButton" Background="White" Width="18" DockPanel.Dock="Right" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="addBookmarkButton_Click">
+                                <Button.Content>
+                                    <Image Source="images/bookmark.png"></Image>
+                                </Button.Content>
+                            </Button>
+                            <TextBox DockPanel.Dock="left" Name="searchBox" Loaded="searchBox_Loaded" GotFocus="searchBox_GotFocus" KeyUp="searchBox_KeyUp"></TextBox>
+                        </DockPanel>
                     </TabItem>
 
                 </TabControl>
 
             </DockPanel>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <WebBrowser Grid.Row="0" Name="browserSource1" Cursor="Arrow" Loaded="browserSource1_Loaded" Grid.ColumnSpan="2" Navigating="browserSource1_Navigating" Navigated="browserSource1_Navigated" MouseUp="Chrome__3_0_MouseUp" />
+                <StatusBar Name="sb_" Grid.Row="1" Height="25" Grid.ColumnSpan="2" Margin="0,0,0,-1">
+                    Browser 1.0 :
+                    <Separator />
+                    <StatusBarItem Name="sb_it1">
+                        <TextBlock Name="txB_sb_it1"></TextBlock>
+                    </StatusBarItem>
+                </StatusBar>
+            </Grid>
+
+
+
 
         </DockPanel>
 
