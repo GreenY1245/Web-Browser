@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpletniBrskalnik", "SpletniBrskalnik\SpletniBrskalnik.csproj", "{2A227BCE-9F7B-47EC-B3E7-505D4B0794FC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FBC00368-EEC5-47DA-9B6C-3036A5C14892} = {FBC00368-EEC5-47DA-9B6C-3036A5C14892}
+		{B5788BC0-080A-4DC8-BF74-E0579040D462} = {B5788BC0-080A-4DC8-BF74-E0579040D462}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserAppControl", "UserAppControl\UserAppControl.csproj", "{FBC00368-EEC5-47DA-9B6C-3036A5C14892}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B5788BC0-080A-4DC8-BF74-E0579040D462} = {B5788BC0-080A-4DC8-BF74-E0579040D462}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserAppControlBookmarks", "UserAppControlBookmarks\UserAppControlBookmarks.csproj", "{B5788BC0-080A-4DC8-BF74-E0579040D462}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2A227BCE-9F7B-47EC-B3E7-505D4B0794FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A227BCE-9F7B-47EC-B3E7-505D4B0794FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A227BCE-9F7B-47EC-B3E7-505D4B0794FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A227BCE-9F7B-47EC-B3E7-505D4B0794FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBC00368-EEC5-47DA-9B6C-3036A5C14892}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBC00368-EEC5-47DA-9B6C-3036A5C14892}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBC00368-EEC5-47DA-9B6C-3036A5C14892}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBC00368-EEC5-47DA-9B6C-3036A5C14892}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5788BC0-080A-4DC8-BF74-E0579040D462}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5788BC0-080A-4DC8-BF74-E0579040D462}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5788BC0-080A-4DC8-BF74-E0579040D462}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5788BC0-080A-4DC8-BF74-E0579040D462}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

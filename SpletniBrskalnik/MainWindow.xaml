@@ -1,0 +1,114 @@
+﻿<Window x:Name="Chrome__3_0" x:Class="SpletniBrskalnik.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SpletniBrskalnik"
+        mc:Ignorable="d"
+        Title="Greenternet Explorer" Height="720" Width="1280" MinWidth="300" MinHeight="150" Icon="images/browser_main_icon.png" ShowInTaskbar="true" WindowStartupLocation="CenterScreen" Closing="Chrome__3_0_Closing" Loaded="Chrome__3_0_Loaded" MouseUp="Chrome__3_0_MouseUp">
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.ColumnSpan="2">
+
+            <Menu DockPanel.Dock="Top">
+                <Menu.Background>
+                    <ImageBrush/>
+                </Menu.Background>
+                <MenuItem Width="40">
+                    <MenuItem.Background>
+                        <ImageBrush Stretch="Uniform" ImageSource="images/file.png"/>
+                    </MenuItem.Background>
+                    <MenuItem Header="_New window" Click="MenuItem_Click" />
+                    <MenuItem Name="export" Header="_Export" Click="export_Click" />
+                    <MenuItem Name="import" Header="_Import" Click="import_Click" />
+                    <Separator />
+                    <MenuItem Name="exitButton" Header="_Exit" MouseLeftButtonDown="exitButton_MouseLeftButtonDown" Click="exitButton_Click"/>
+                </MenuItem>
+
+                <ToolBarTray>
+                    <ToolBar>
+                        <Button Name="cutShort" Content="cut" Command="Cut" BorderThickness="0" Foreground="{x:Null}" >
+                            <Button.Background>
+                                <ImageBrush Stretch="Uniform" ImageSource="images/cut.png"/>
+                            </Button.Background>
+                        </Button>
+                        <Button Name="copyShort" Content="copy" Command="Copy" BorderThickness="0" Foreground="{x:Null}" >
+                            <Button.Background>
+                                <ImageBrush Stretch="Uniform" ImageSource="images/copy.png"/>
+                            </Button.Background>
+                        </Button>
+                        <Button Name="pasteShort" Content="paste" Command="Paste" BorderThickness="0" Foreground="{x:Null}" >
+                            <Button.Background>
+                                <ImageBrush Stretch="Uniform" ImageSource="images/paste.png"/>
+                            </Button.Background>
+                        </Button>
+                    </ToolBar>
+                </ToolBarTray>
+
+                <MenuItem Name="bookmarks" Width="40" StaysOpenOnClick="True">
+                    <MenuItem.Background>
+                        <ImageBrush Stretch="Uniform" ImageSource="images/bookmark.png"/>
+                    </MenuItem.Background>
+
+                    <ListView Name="bkmark">
+                        <ListViewItem Name="b_google">www.google.com</ListViewItem>
+                        <ListViewItem Name="b_twitter">www.twitter.com/GreenY1245</ListViewItem>
+                        <ListViewItem Name="b_steam">store.steampowered.com</ListViewItem>
+                    </ListView>
+
+                </MenuItem>
+
+                <MenuItem Width="40">
+                    <MenuItem.Background>
+                        <ImageBrush Stretch="Uniform" ImageSource="images/history.png"/>
+                    </MenuItem.Background>
+                    <ListView x:Name="his_listView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <ListViewItem Name="Default_test_item">www.google.com</ListViewItem>
+                    </ListView>
+                </MenuItem>
+
+                <Button Background="White" Width="25" Height="25" Name="nTab_button" Click="nTab_button_Click" ToolTip="Add a new tab" BorderBrush="{x:Null}" Foreground="{x:Null}" BorderThickness="0">
+                    <Button.Content>
+                        <Image Source="images/plus.png"></Image>
+                    </Button.Content>
+                </Button>
+
+                <MenuItem Width="25" BorderThickness="0" StaysOpenOnClick="True" Click="MenuItem_Click_1">
+                    <MenuItem.Background>
+                        <ImageBrush Stretch="UniformToFill" ImageSource="images/dots.png"/>
+                    </MenuItem.Background>
+                </MenuItem>
+
+            </Menu>
+
+            <DockPanel DockPanel.Dock="Top">
+
+                <TabControl x:Name="tC_" DockPanel.Dock="Top">
+
+                    <TabItem Header="New Tab">
+                        <local:Tab></local:Tab>
+                    </TabItem>
+
+                </TabControl>
+
+            </DockPanel>
+
+        </DockPanel>
+
+
+
+    </Grid>
+
+
+
+</Window>
