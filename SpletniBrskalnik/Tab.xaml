@@ -46,15 +46,16 @@
                 </Button.Content>
             </Button>
 
-            <TextBox HorizontalAlignment="Stretch" VerticalContentAlignment="Center" DockPanel.Dock="left" Name="searchBox" Loaded="searchBox_Loaded" KeyUp="searchBox_KeyUp" MouseLeftButtonUp="searchBox_MouseLeftButtonUp"></TextBox>
+            <TextBox Style="{StaticResource SearchBox}" DockPanel.Dock="left" Name="searchBox" Loaded="searchBox_Loaded" KeyUp="searchBox_KeyUp" MouseLeftButtonUp="searchBox_MouseLeftButtonUp">
+            </TextBox>
         </DockPanel>
 
-        <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1" x:FieldModifier="public" DockPanel.Dock="Top" Name="bookmark_mainwindow_listview">
+        <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1" x:FieldModifier="public" DockPanel.Dock="Top" Name="bookmark_mainwindow_listview" MouseLeftButtonUp="bookmark_mainwindow_listview_MouseLeftButtonUp" Loaded="bookmark_mainwindow_listview_Loaded" SourceUpdated="bookmark_mainwindow_listview_SourceUpdated" MouseDoubleClick="bookmark_mainwindow_listview_MouseDoubleClick">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <Image Name="sourceimage" Source="{Binding AddressURI}" MaxHeight="20px"></Image>
-                        <TextBlock Text="{Binding Title}" Margin="5,0,0,0"></TextBlock>
+                        <TextBlock VerticalAlignment="Center" Text="{Binding Title}" Margin="5,0,0,0"></TextBlock>
                     </StackPanel>
 
                     <DataTemplate.Triggers>
@@ -73,7 +74,7 @@
             </ListView.ItemsPanel>
         </ListView>
 
-        <WebBrowser Grid.Row="2" Name="browserSource1" Cursor="Arrow" Loaded="browserSource1_Loaded" Grid.ColumnSpan="2" Navigating="browserSource1_Navigating" Navigated="browserSource1_Navigated"/>
+        <WebBrowser Grid.Row="2" Name="browserSource1" Cursor="Arrow" Loaded="browserSource1_Loaded" Grid.ColumnSpan="2" Navigating="browserSource1_Navigating" Navigated="browserSource1_Navigated" LoadCompleted="browserSource1_LoadCompleted"/>
 
         <StatusBar Grid.Row="3" Name="sb_" MaxHeight="25" MinHeight="25">
             Browser 1.0 :

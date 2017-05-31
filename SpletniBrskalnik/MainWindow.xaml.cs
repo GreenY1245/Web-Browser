@@ -206,15 +206,7 @@ namespace SpletniBrskalnik
 
         public void Chrome__3_0_Loaded(object sender, RoutedEventArgs e)
         {
-            var userSettings = SpletniBrskalnik.Properties.Settings.Default;
-
-            if (userSettings.showBookmarks == true)
-            {
-                bookmarks.Visibility = Visibility.Visible;
-            } else
-            {
-                bookmarks.Visibility = Visibility.Hidden;
-            }
+            nTab_button_Click(sender, e);
         }
     }
 }

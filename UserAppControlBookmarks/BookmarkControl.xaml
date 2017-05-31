@@ -7,6 +7,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="750">
 
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="BookmarkResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.7*"></RowDefinition>
@@ -29,13 +37,13 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Button Style="{StaticResource ButtonStyle}" Name="AddBookmark" Grid.Row="8" Grid.Column="0" Margin="3" Content="Add bookmark" Click="AddBookmark_Click"></Button>
-        <Button Style="{StaticResource ButtonStyle}" Name="addFolder" Grid.Row="9" Grid.Column="0" Margin="3" Content="Add folder" Click="addFolder_Click"></Button>
-        <Button Style="{StaticResource ButtonStyle}" Name="RemoveBookmark" Grid.Row="8" Grid.Column="4" Margin="3" Content="Remove Bookmark" Click="Button_Click_1"></Button>
-        <Button Style="{StaticResource ButtonStyle}" Name="RemoveFolder" Grid.Row="9" Grid.Column="5" Margin="3" Content="Remove Folder" Click="RemoveFolder_Click"></Button>
+        <Button Style="{StaticResource ButtonStyle}" Name="AddBookmark" Grid.Row="8" Grid.Column="0" Content="Add bookmark" Click="AddBookmark_Click"></Button>
+        <Button Style="{StaticResource ButtonStyle}" Name="addFolder" Grid.Row="9" Grid.Column="0" Content="Add folder" Click="addFolder_Click"></Button>
+        <Button Style="{StaticResource ButtonStyle}" Name="RemoveBookmark" Grid.Row="8" Grid.Column="4" Content="Remove Bookmark" Click="Button_Click_1"></Button>
+        <Button Style="{StaticResource ButtonStyle}" Name="EditBookmark" Grid.Row="9" Grid.Column="5" Content="Edit Bookmark" Click="EditBookmark_Click"></Button>
 
-        <TextBox Name="newBookmarkURL" Grid.Row="8" Grid.Column="1" Margin="3"></TextBox>
-        <TextBox Name="newFolder" Grid.Row="9" Grid.Column="1" Margin="3"></TextBox>
+        <TextBox Style="{StaticResource newItemsTextBox}" Name="newBookmarkURL" Grid.Row="8" Grid.Column="1"></TextBox>
+        <TextBox Style="{StaticResource newItemsTextBox}" Name="newFolder" Grid.Row="9" Grid.Column="1"></TextBox>
 
         <TreeView Name="treeview_bookmarks" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="8" ItemsSource="{Binding}" SelectedItemChanged="bkmark_SelectedItemChanged" PreviewMouseRightButtonDown="treeview_bookmarks_PreviewMouseRightButtonDown">
             <TreeView.ItemTemplate>
@@ -52,20 +60,21 @@
 
         </TreeView>
 
-        <GridSplitter Background="DarkGray" Grid.RowSpan="8" Grid.Column="2" HorizontalAlignment="Stretch"></GridSplitter>
-        
+        <GridSplitter Grid.RowSpan="8" Grid.Column="2"></GridSplitter>
+
         <ListView Name="listview_bookmarks" Grid.Column="3" Grid.RowSpan="8" Grid.ColumnSpan="2">
 
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <DockPanel>
-                        <Image Margin="2,0,0,0" Name="sourceimage" MaxHeight="16" Source="{Binding AddressURI}"></Image>
-                        <TextBlock Margin="2,0,0,0" Text="{Binding Title}"></TextBlock>
+                        <Image Style="{StaticResource ListView_Image}" Name="sourceimage" Source="{Binding AddressURI}"></Image>
+                        <TextBlock Style="{StaticResource DomainBold}" Text="{Binding Title}"></TextBlock>
+                        <TextBlock Style="{StaticResource Address}" Text="{Binding Address}"></TextBlock>
                     </DockPanel>
 
                     <DataTemplate.Triggers>
                         <DataTrigger Binding="{Binding SIDomain}" Value="true">
-                            <Setter TargetName="sourceimage" Property="Source" Value="/Resources/sloflag.ico"></Setter>
+                            <Setter TargetName="sourceimage" Property="Source" Value="Resources/sloflag.ico"></Setter>
                         </DataTrigger>
                     </DataTemplate.Triggers>
 

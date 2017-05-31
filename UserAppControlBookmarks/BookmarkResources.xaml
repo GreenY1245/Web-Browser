@@ -9,6 +9,7 @@
         <Setter Property="BorderBrush" Value="#000000"></Setter>
         <Setter Property="FontWeight" Value="Bold"></Setter>
         <Setter Property="SnapsToDevicePixels" Value="True"></Setter>
+        <Setter Property="Margin" Value="3"></Setter>
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
@@ -18,6 +19,55 @@
                 <Setter Property="FontWeight" Value="Bold"></Setter>
             </Trigger>
         </Style.Triggers>
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="DomainBold">
+        <Setter Property="FontWeight" Value="Bold"></Setter>
+        <Setter Property="Margin" Value="5,0,0,0"></Setter>
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="TimeBold" BasedOn="{StaticResource DomainBold}">
+        <Setter Property="Opacity" Value="0.7"></Setter>
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="Address" BasedOn="{StaticResource DomainBold}">
+        <Setter Property="Opacity" Value="0.5"></Setter>
+    </Style>
+
+    <Style TargetType="TextBox" x:Key="newItemsTextBox">
+        <Setter Property="Margin" Value="3"></Setter>
+    </Style>
+
+    <Style TargetType="GridSplitter">
+        <Setter Property="Background" Value="DarkGray"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+    </Style>
+
+    <Style TargetType="Image" x:Key="ListView_Image">
+        <Setter Property="Margin" Value="5,0,0,0"></Setter>
+        <Setter Property="MaxHeight" Value="16"></Setter>
+    </Style>
+    
+    <!-- BOOKMARK EDIT XAML STYLES -->
+
+    <Style TargetType="TextBlock" x:Key="ListView_Title">
+        <Setter Property="Margin" Value="5,0,0,0"></Setter>
+    </Style>
+
+    <Style TargetType="TextBox" x:Key="edit_TextBoxes">
+        <Setter Property="Margin" Value="-70,0,30,0"></Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="edit_TextBlocks">
+        <Setter Property="Margin" Value="0,0,80,0"></Setter>
+        <Setter Property="TextAlignment" Value="Right"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+    </Style>
+
+    <Style TargetType="Button" x:Key="edit_ApplyButton" BasedOn="{StaticResource ButtonStyle}">
+        <Setter Property="Margin" Value="125,0,-125,0"></Setter>
+        
     </Style>
 
 </ResourceDictionary>

@@ -29,8 +29,6 @@ namespace UserAppControlBookmarks
     /// </summary>
     public partial class UserControl1 : UserControl
     {
-        int treeview_bookmarkss = 3;
-
         public UserControl1()
         {
             InitializeComponent();
@@ -45,8 +43,6 @@ namespace UserAppControlBookmarks
 
             Mapa m = (Mapa)treeview_bookmarks.SelectedItem;
             Bookmark bk = new Bookmark();
-
-            string bkm;
 
             if (m != null)
             {
@@ -97,18 +93,6 @@ namespace UserAppControlBookmarks
             {
                 Mapa m = (Mapa)treeview_bookmarks.SelectedItem;
                 m.Maps.Add(new Mapa(folder_name));
-            }
-        }
-
-        private void RemoveFolder_Click(object sender, RoutedEventArgs e)
-        {
-            Mapa x = (Mapa)treeview_bookmarks.SelectedItem;
-
-            bool del = false;
-
-            if (UserAppControlController.Controller.mapa_list.IndexOf(x) != 0)
-            {
-                del = RemoveFolder_(x, UserAppControlController.Controller.mapa_list);
             }
         }
 
@@ -179,6 +163,17 @@ namespace UserAppControlBookmarks
                 tvi.Focus();
                 e.Handled = true;
             }
+        }
+
+        private void EditBookmark_Click(object sender, RoutedEventArgs e)
+        {
+            BookmarkEdit be = new BookmarkEdit();
+            be.Show();
+            be.Closed += (s, eventarg) =>
+            {
+                treeview_bookmarks.Items.Refresh();
+                listview_bookmarks.Items.Refresh();
+            };
         }
     }
 }

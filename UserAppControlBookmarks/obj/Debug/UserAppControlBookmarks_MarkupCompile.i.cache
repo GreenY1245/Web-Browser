@@ -4,17 +4,17 @@
 library
 C#
 .cs
-D:\Dropbox\Dropbox\Visual Studio Programs\Interakcija-c-r\SpletniBrskalnik\UserAppControlBookmarks\obj\Debug\
+D:\Dropbox\Visual Studio Programs\Interakcija-c-r\SpletniBrskalnik\UserAppControlBookmarks\obj\Debug\
 UserAppControlBookmarks
 none
 false
 DEBUG;TRACE
 
-2-1030658746
+3-1676531371
 
-8-2107392123
-141395751736
-BookmarkControl.xaml;BookmarkResources.xaml;
+9704636358
+141199428177
+BookmarkControl.xaml;BookmarkEdit.xaml;BookmarkResources.xaml;
 
-True
+False
 

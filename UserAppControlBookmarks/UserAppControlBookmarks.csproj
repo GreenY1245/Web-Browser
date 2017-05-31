@@ -58,12 +58,19 @@
       <DependentUpon>BookmarkControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="BookmarkEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BookmarkResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BookmarkEdit.xaml.cs">
+      <DependentUpon>BookmarkEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -85,6 +92,12 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\sloflag.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\browser_main_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

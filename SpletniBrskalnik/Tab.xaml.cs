@@ -36,19 +36,13 @@ namespace SpletniBrskalnik
         {
             InitializeComponent();
 
-            if (UserAppControlController.Controller != null)
+            var userapp = UserAppControlController.Controller;
+
+            if (userapp != null)
             {
-                bookmark_mainwindow_listview.ItemsSource = UserAppControlController.Controller.mapa_list[0].Bookmarks;
+                bookmark_mainwindow_listview.ItemsSource = userapp.mapa_list[0].Bookmarks;
             }
-        }
 
-        private void searchBox_Loaded(object sender, RoutedEventArgs e)
-        {
-            searchBox.Text = Convert.ToString(browserSource1.Source);
-        }
-
-        private void browserSource1_Loaded(object sender, RoutedEventArgs e)
-        {
             string x = SpletniBrskalnik.Properties.Settings.Default.HomePage;
 
             if (x.StartsWith("https://") || x.StartsWith("http://"))
@@ -59,6 +53,25 @@ namespace SpletniBrskalnik
             {
                 browserSource1.Source = new Uri("http://" + x);
             }
+        }
+
+        private void searchBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            searchBox.Text = Convert.ToString(browserSource1.Source);
+        }
+
+        private void browserSource1_Loaded(object sender, RoutedEventArgs e)
+        {
+            //string x = SpletniBrskalnik.Properties.Settings.Default.HomePage;
+
+            //if (x.StartsWith("https://") || x.StartsWith("http://"))
+            //{
+            //    browserSource1.Source = new Uri(x);
+            //}
+            //else
+            //{
+            //    browserSource1.Source = new Uri("http://" + x);
+            //}
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -106,7 +119,6 @@ namespace SpletniBrskalnik
 
         private void browserSource1_Navigating(object sender, NavigatingCancelEventArgs e)
         {
-            searchBox.Text = Convert.ToString(browserSource1.Source);
             txB_sb_it1.Text = Convert.ToString(browserSource1.Source);
         }
 
@@ -121,8 +133,6 @@ namespace SpletniBrskalnik
             UserAppControlController.Controller.history_list.Add(his);
 
             searchBox.Text = Convert.ToString(browserSource1.Source);
-
-            txB_sb_it1.Text = "Loaded";
         }
 
         private void addBookmarkButton_Click(object sender, RoutedEventArgs e)
@@ -158,6 +168,15 @@ namespace SpletniBrskalnik
             {
                 backHome.Visibility = Visibility.Hidden;
             }
+
+            if (userSettings.showBookmarks == true)
+            {
+                bookmark_mainwindow_listview.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                bookmark_mainwindow_listview.Visibility = Visibility.Hidden;
+            }
         }
 
         private void backHome_Click(object sender, RoutedEventArgs e)
@@ -187,6 +206,44 @@ namespace SpletniBrskalnik
         {
             searchBox.SelectAll();
             this.Focus();
+        }
+
+        private void browserSource1_LoadCompleted(object sender, NavigationEventArgs e)
+        {
+            txB_sb_it1.Text = "Loaded";
+        }
+
+        private void bookmark_mainwindow_listview_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var item = ((Bookmark)bookmark_mainwindow_listview.SelectedItem);
+
+            if (item != null)
+            {
+                Uri redirect = new Uri(item.Address);
+                bookmarklinkRedirect(redirect);
+                searchBox.Text = Convert.ToString(redirect);
+            }
+        }
+
+        private void bookmarklinkRedirect(Uri url)
+        {
+            browserSource1.Source = url;
+        }
+
+        private void bookmark_mainwindow_listview_Loaded(object sender, RoutedEventArgs e)
+        {
+            bookmark_mainwindow_listview.Items.Refresh();
+        }
+
+        private void bookmark_mainwindow_listview_SourceUpdated(object sender, DataTransferEventArgs e)
+        {
+            bookmark_mainwindow_listview.Items.Refresh();
+        }
+
+        private void bookmark_mainwindow_listview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Bookmark x = (Bookmark)bookmark_mainwindow_listview.SelectedItem;
+            MessageBox.Show(x.Title + "\n\n" + x.Address);
         }
     }
 }

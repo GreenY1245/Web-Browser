@@ -25,7 +25,7 @@
                     <ImageBrush/>
                 </Menu.Background>
 
-                <MenuItem Width="40">
+                <MenuItem Style="{StaticResource MenuitemDefault}">
                     <MenuItem.Background>
                         <ImageBrush Stretch="Uniform" ImageSource="images/file.png"/>
                     </MenuItem.Background>
@@ -38,67 +38,41 @@
 
                 <ToolBarTray>
                     <ToolBar>
-                        <Button Name="cutShort" Content="cut" Command="Cut" BorderThickness="0" Foreground="{x:Null}" >
-                            <Button.Background>
-                                <ImageBrush Stretch="Uniform" ImageSource="images/cut.png"/>
-                            </Button.Background>
+                        <Button Style="{StaticResource MainWindow_ToolBarTray}" Name="cutShort" Command="Cut">
+                            <Button.Content>
+                                <Image Style="{StaticResource MainWindow_ToolBarTray_ButtonImage}" Source="images/cut.png"/>
+                            </Button.Content>    
                         </Button>
-                        <Button Name="copyShort" Content="copy" Command="Copy" BorderThickness="0" Foreground="{x:Null}" >
-                            <Button.Background>
-                                <ImageBrush Stretch="Uniform" ImageSource="images/copy.png"/>
-                            </Button.Background>
+                        <Button Style="{StaticResource MainWindow_ToolBarTray}" Name="copyShort" Command="Copy">
+                            <Button.Content>
+                                <Image Style="{StaticResource MainWindow_ToolBarTray_ButtonImage}" Source="images/copy.png"/>
+                            </Button.Content>
                         </Button>
-                        <Button Name="pasteShort" Content="paste" Command="Paste" BorderThickness="0" Foreground="{x:Null}" >
-                            <Button.Background>
-                                <ImageBrush Stretch="Uniform" ImageSource="images/paste.png"/>
-                            </Button.Background>
+                        <Button Style="{StaticResource MainWindow_ToolBarTray}" Name="pasteShort" Command="Paste">
+                            <Button.Content>
+                                <Image Style="{StaticResource MainWindow_ToolBarTray_ButtonImage}" Source="images/paste.png"/>
+                            </Button.Content>
                         </Button>
                     </ToolBar>
                 </ToolBarTray>
 
-                <MenuItem Name="bookmarks" Width="40" StaysOpenOnClick="True">
-                    <MenuItem.Background>
-                        <ImageBrush Stretch="Uniform" ImageSource="images/bookmark.png"/>
-                    </MenuItem.Background>
-
-                    <ListView Name="bkmark">
-                        <ListViewItem Name="b_google">www.google.com</ListViewItem>
-                        <ListViewItem Name="b_twitter">www.twitter.com/GreenY1245</ListViewItem>
-                        <ListViewItem Name="b_steam">store.steampowered.com</ListViewItem>
-                    </ListView>
-
-                </MenuItem>
-
-                <MenuItem Width="40">
-                    <MenuItem.Background>
-                        <ImageBrush Stretch="Uniform" ImageSource="images/history.png"/>
-                    </MenuItem.Background>
-                    <ListView x:Name="his_listView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <ListViewItem Name="Default_test_item">www.google.com</ListViewItem>
-                    </ListView>
-                </MenuItem>
-
-                <Button Background="White" Width="25" Height="25" Name="nTab_button" Click="nTab_button_Click" ToolTip="Add a new tab" BorderBrush="{x:Null}" Foreground="{x:Null}" BorderThickness="0">
+                <Button Style="{StaticResource MainWindow_MenuButtons_newtab}" Name="nTab_button" Click="nTab_button_Click">
                     <Button.Content>
                         <Image Source="images/plus.png"></Image>
                     </Button.Content>
                 </Button>
 
-                <MenuItem Width="25" BorderThickness="0" StaysOpenOnClick="True" Click="MenuItem_Click_1">
-                    <MenuItem.Background>
-                        <ImageBrush Stretch="UniformToFill" ImageSource="images/dots.png"/>
-                    </MenuItem.Background>
-                </MenuItem>
+                <Button Style="{StaticResource MainWindow_MenuButtons}" Click="MenuItem_Click_1">
+                    <Button.Content>
+                        <Image Style="{StaticResource MainWindow_MenuIcon}" Source="images/dots.png"></Image>
+                    </Button.Content>
+                </Button>
 
             </Menu>
 
             <DockPanel DockPanel.Dock="Top">
 
                 <TabControl x:Name="tC_" DockPanel.Dock="Top">
-
-                    <TabItem Header="New Tab" MouseWheel="TabItem_MouseWheel">
-                        <local:Tab></local:Tab>
-                    </TabItem>
 
                 </TabControl>
 

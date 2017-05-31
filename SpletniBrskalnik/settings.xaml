@@ -26,7 +26,7 @@
 
         <TabControl Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="4">
 
-            <TabItem Header="General" Width="100" Name="GeneralSettings">
+            <TabItem Header="General" Name="GeneralSettings">
 
                     <DockPanel Name="dock_general">
 
@@ -48,13 +48,31 @@
                             </Grid.ColumnDefinitions>
 
                         <Label Grid.ColumnSpan="2" DockPanel.Dock="Top">Aplication startup homepage</Label>
-                        <RadioButton Grid.Row="1" Grid.ColumnSpan="2" DockPanel.Dock="Top" Name="radio_default" Margin="10" Content="Default homepage (Google)" Checked="radio_default_Checked"></RadioButton>
-                        <RadioButton Grid.Row="2" Grid.ColumnSpan="2" DockPanel.Dock="Top" Name="radio_reloadlast" Margin="10" Content="Reload previous page" Checked="radio_reloadlast_Checked"></RadioButton>
-                        <RadioButton Grid.Row="3" Grid.ColumnSpan="2" DockPanel.Dock="top" Name="radio_custompage" Margin="10" Content="Load custom page" Checked="radio_custompage_Checked"></RadioButton>
-                        <TextBox Name="customSource" Grid.Row="3" Grid.Column="1" DockPanel.Dock="Top" Margin="10"></TextBox>
+                        <RadioButton Grid.Row="1" Grid.ColumnSpan="2" Name="radio_default" Content="Default homepage (Google)" Checked="radio_default_Checked"></RadioButton>
+                        <RadioButton Grid.Row="2" Grid.ColumnSpan="2" Name="radio_reloadlast" Content="Reload previous page" Checked="radio_reloadlast_Checked"></RadioButton>
+                        <RadioButton Grid.Row="3" Grid.ColumnSpan="2" Name="radio_custompage" Content="Load custom page" Checked="radio_custompage_Checked">
+                            <RadioButton.Triggers>
+                                <EventTrigger RoutedEvent="RadioButton.Checked">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="customSourceBrush" Duration="0:0:0.5" FillBehavior="HoldEnd" Storyboard.TargetProperty="Color">
+                                                <ColorAnimationUsingKeyFrames.KeyFrames>
+                                                    <LinearColorKeyFrame Value="LightGreen" KeyTime="0:0:0.5"></LinearColorKeyFrame>
+                                                </ColorAnimationUsingKeyFrames.KeyFrames>
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </RadioButton.Triggers>
+                        </RadioButton>
+                        <TextBox x:Name="customSource" Grid.Row="3" Grid.Column="1">
+                            <TextBox.Background>
+                                <SolidColorBrush x:Name="customSourceBrush" Color="White" />
+                            </TextBox.Background>
+                        </TextBox>
                         <Separator Grid.ColumnSpan="2" DockPanel.Dock="Top" />
-                        <Button Style="{StaticResource ButtonStyle}" Name="Apply" Margin="10" Grid.Column="1" Grid.Row="6" DockPanel.Dock="Left" Content="Apply" Click="Apply_Click"></Button>
-                        <Button Style="{StaticResource ButtonStyle}" IsCancel="True" Name="Cancel" Margin="10" Grid.Column="0" Grid.Row="6" DockPanel.Dock="Left" Content="Cancel" Click="Button_Click"></Button>
+                        <Button Style="{StaticResource ButtonCancelApply}" Name="Apply" Grid.Column="1" Grid.Row="6" Content="Apply" Click="Apply_Click"></Button>
+                        <Button Style="{StaticResource ButtonCancelApply}" IsCancel="True" Name="Cancel" Grid.Column="0" Grid.Row="6" Content="Cancel" Click="Button_Click"></Button>
 
                         </Grid>
 
@@ -62,7 +80,7 @@
 
                 </TabItem>
 
-                <TabItem Header="Style" Width="100" Name="StyleSettings">
+            <TabItem Header="Style" Name="StyleSettings">
 
                     <DockPanel Name="dock_style">
 
@@ -88,8 +106,8 @@
                             <CheckBox Name="showBookmarks" Grid.Row="1" Content="Show Bookmarks" Checked="CheckBox_Checked" Unchecked="showBookmarks_Unchecked"></CheckBox>
                             <CheckBox Name="showHomeButton" Grid.Row="1" Grid.Column="2" Content="Show Home Button" Checked="showHomeButton_Checked" Unchecked="showHomeButton_Unchecked"></CheckBox>
 
-                            <Button Style="{StaticResource ButtonStyle}" Name="Apply_style" Margin="10" Grid.Column="1" Grid.Row="6" DockPanel.Dock="Left" Content="Apply" Click="Apply_style_Click"></Button>
-                            <Button Style="{StaticResource ButtonStyle}" IsCancel="True" Name="Cancel_style" Margin="10" Grid.Column="0" Grid.Row="6" DockPanel.Dock="Left" Content="Cancel" Click="Cancel_style_Click"></Button>
+                            <Button Style="{StaticResource ButtonCancelApply}" Name="Apply_style" Grid.Column="1" Grid.Row="6" Content="Apply" Click="Apply_style_Click"></Button>
+                            <Button Style="{StaticResource ButtonCancelApply}" IsCancel="True" Name="Cancel_style" Grid.Column="0" Grid.Row="6" Content="Cancel" Click="Cancel_style_Click"></Button>
 
                         </Grid>
 
@@ -97,7 +115,7 @@
 
                 </TabItem>
 
-            <TabItem Header="Bookmarks" Width="100" Name="BookmarkSettings">
+            <TabItem Header="Bookmarks" Name="BookmarkSettings">
 
                 <Grid>
                     <BookmarkControl:UserControl1></BookmarkControl:UserControl1>
@@ -105,7 +123,7 @@
 
             </TabItem>
 
-            <TabItem Header="History" Width="100" Name="HistorySettings">
+            <TabItem Header="History" Name="HistorySettings">
 
                     <Grid>
                         <Grid.RowDefinitions>
@@ -128,14 +146,14 @@
                             <ColumnDefinition Width="2*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
-                        <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="listview_history" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="8" ItemsSource="{Binding}">
+                        <ListView Style="{StaticResource Settings_HistoryListView}" Name="listview_history" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="8">
                             <ListView.ItemTemplate>
                             <DataTemplate>
                                 <DockPanel>
-                                    <Image Name="sourceimage" MaxHeight="16" Source="{Binding AddressURI}"></Image>
-                                    <TextBlock FontWeight="Bold" Margin="10, 0, 0, 0" Text="{Binding Title}"></TextBlock>
-                                    <TextBlock FontWeight="Bold" Opacity="0.7" Margin="10, 0, 0, 0" Text="{Binding Time}"></TextBlock>
-                                    <TextBlock Margin="10, 0, 0, 0" Opacity="0.5" Text="{Binding Address}"></TextBlock>
+                                    <Image Style="{StaticResource ListViewImage}" Name="sourceimage" Source="{Binding AddressURI}"></Image>
+                                    <TextBlock Style="{StaticResource DomainBold}" Text="{Binding Title}"></TextBlock>
+                                    <TextBlock Style="{StaticResource TimeBold}" Text="{Binding Time}"></TextBlock>
+                                    <TextBlock Style="{StaticResource Address}" Text="{Binding Address}"></TextBlock>
                                 </DockPanel>
 
                                 <DataTemplate.Triggers>
@@ -149,8 +167,8 @@
                         </ListView>
 
 
-                    <Button Style="{StaticResource ButtonStyle}" Margin="5, 5, 5, 5" Name="history_deleteOne" Grid.Row="8" Grid.Column="1" Content="Delete" Click="history_deleteOne_Click"></Button>
-                    <Button Style="{StaticResource ButtonStyle}" Margin="5, 5, 5, 5" Name="history_deleteAll" Grid.Row="8" Grid.Column="2" Content="Delete All" Click="history_deleteAll_Click"></Button>
+                    <Button Style="{StaticResource ButtonDeleteDeleteAll}" Name="history_deleteOne" Grid.Row="8" Grid.Column="1" Content="Delete" Click="history_deleteOne_Click"></Button>
+                    <Button Style="{StaticResource ButtonDeleteDeleteAll}" Name="history_deleteAll" Grid.Row="8" Grid.Column="2" Content="Delete All" Click="history_deleteAll_Click"></Button>
 
                     </Grid>
 

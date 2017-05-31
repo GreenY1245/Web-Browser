@@ -1,0 +1,97 @@
+﻿<Window x:Class="UserAppControlBookmarks.BookmarkEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UserAppControlBookmarks"
+        mc:Ignorable="d"
+        Title="BookmarkEdit" Icon="Resources/browser_main_icon.png" Height="300" Width="750" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="BookmarkResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+
+        <TreeView Grid.Row="0" Grid.RowSpan="9" SelectedItemChanged="bkmark_SelectedItemChanged" Grid.Column="0" Name="treeview_bookmarks" ItemsSource="{Binding}">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Maps}">
+                    <TextBlock Text="{Binding Title}"></TextBlock>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+
+        <ListView Name="listview_bookmarks" Grid.Column="1" Grid.RowSpan="9" SelectionChanged="listview_bookmarks_SelectionChanged">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel>
+                        <Image Style="{StaticResource ListView_Image}" Name="sourceimage" Source="{Binding AddressURI}"></Image>
+                        <TextBlock Style="{StaticResource ListView_Title}" Text="{Binding Title}"></TextBlock>
+                    </DockPanel>
+
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding SIDomain}" Value="true">
+                            <Setter TargetName="sourceimage" Property="Source" Value="Resources/sloflag.ico"></Setter>
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+
+        <DockPanel Name="editdockpanel" Grid.Row="0" Grid.RowSpan="9" Grid.Column="3">
+            <Grid Name="editdockpanelgrid">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBox Style="{StaticResource edit_TextBoxes}" Name="textbox_title" Grid.Row="1" Grid.Column="1" Text="{Binding Title}"></TextBox>
+                <TextBox Style="{StaticResource edit_TextBoxes}" Name="textbox_address" Grid.Row="3" Grid.Column="1" Text="{Binding Address}"></TextBox>
+
+                <TextBlock Style="{StaticResource edit_TextBlocks}" Grid.Row="1">Bookmark Title: </TextBlock>
+                <TextBlock Style="{StaticResource edit_TextBlocks}" Grid.Row="3">Bookmark Address: </TextBlock>
+
+                <Button Style="{StaticResource edit_ApplyButton}" Grid.Row="5" Content="Save" Click="Button_Click"></Button>
+            </Grid>
+        </DockPanel>
+
+    </Grid>
+</Window>
